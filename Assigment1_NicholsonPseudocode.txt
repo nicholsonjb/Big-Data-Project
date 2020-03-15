@@ -1,0 +1,131 @@
+Using the HBase shell to create the schema of the table, the create() command is used, as seen in Table 1.
+create 'books',' Topic', 'Sub-topic', 'Title', 'Series',' Series Title', 'Series Number', 'Author', 'Author Affiliation', 'Publisher', 'Reprint edition', 'Language', 'Paperback', 'ISBN'
+
+ 
+Verification of the table being created in HBase or to check it the books table is done using the list command. The user can also see information about the recently created table using the describe command. 
+describe 'books.'
+The describe() command displays information about column families, associated filters, and the version of the table. 
+Once the table is created, the records provided as examples from the business are loaded into the table using the put() command. 
+Record 1:
+put 'books', '00001',' Topic', 'Fiction' 
+put 'books', '00001','Sub-topic', 'Young-adult' 
+put 'books', '00001','Sub-topic', 'Mystery' 
+put 'books', '00001','Sub-topic', 'Adventure', 
+put 'books', '00001','Title',' A study in Charlotte' 
+put 'books', '00001','Series','Yes' 
+put 'books', '00001','Series Title', 'Charlotte Holmes Series' 
+put 'books', '00001','Series Number','1'
+put 'books', '00001','Author', 'Author 1: Brittany Cavallaro' ,'Author', 'Author 2:','Author','Author 4:' 
+put 'books', '00001','Publisher',' Katherine Tegen Books'
+put 'books', '00001','Reprint edition', 'January 3, 2017' 
+put 'books', '00001','Language',' English' 
+put 'books', '00001','Paperback', '352 pages',
+put 'books', '00001','ISBN', 'ISBN-10: 0062398911','ISBN', 'ISBN-13: 978-0062398918'
+put 'books', '00001','Product Dimensions' ,'5.3 x 0.8 x 8 inches' 
+ 
+Record 2:
+put 'books', '00002',' Topic', 'Non-Fiction.'
+put 'books', '00002','Sub-topic', 'Adult' 
+put 'books', '00002','Sub-topic', 'Young-Adult' 
+put 'books', '00002','Sub-topic', 'Self Help' 
+put 'books', '00002','Sub-topic', 'Professional training'
+put 'books', '00002','Sub-topic', 'Comedy' 
+put 'books', '00002','Title',' How to be a comedian'
+put 'books', '00002','Series' 'no' 
+put 'books', '00002','Author', 'Author 1: George Carlin', 'Author 2:David Letterman', 'Author 3: Jay Leno', 'Author 4: Conan O'Brian', 'Author 5: Jimmy Kimmel', 'Author 5: George Lopez', 'Author 6: Eddie Murphy', 'Author 7: Ellen Degeneres', 'Author 8: Richard Pryor', 'Author 9: Margaret Cho'
+put 'books', '00002','Author Affiliation,' 'Author 2, 12 Second Street, NY 10005', 'Author 5, 91, Hollywood Street, Los Angeles, CA 90100'
+put 'books', '00002',' Publisher', 'McGraw Hill Academic Press'
+put 'books', '00002',' Reprint edition','8'
+put 'books', '00002','Language',' English'
+ put 'books', '00002','Paperback', '666 pages' 
+put 'books', '00002','ISBN','ISBN-10: 0087738911', '00002','ISBN','ISBN-13: 942-006711918'
+The following commands are used to verify information about the newly created table and two records have been added and explain their functions.
+exists 'books.' 
+checks to see of books table exists
+count 'books' 
+count the number of records in the table
+get 'books','00001' 
+read record 00001 from books table
+scan 'books' 
+scans data in HTable books and returns table data.
+If the user wanted to delete a record from the books table, they would use the command 
+deleteall 'books,' '00001'.
+The book's table has been created but if the business wanted to update the table. The alter command is used. Below is an example of using the alter command:
+Alter 'books', {Name => 'issue date'}
+The above command will add a new column family to the Hbase table books. If a column needs to be removed the alter command is used as seen below:
+Alter 'books', {Name => 'issue date', Method => 'delete'}
+The alter command can also be used to update the maximum number of cells of a column family as seen below:
+alter 'books', NAME ⇒ ' author', VERSIONS ⇒ 5
+There are several different commands to consider as well for security purposes. There are three commands used for this function: grant, revoke, and user_permission.
+The grant command gives specific user rights such as read, write, execute, and admin on a table for a user. The example below grants all privileges to the user 'DATA650'
+Grant 'DATA650', 'RWXCA' ['books']
+The following code revokes all permission from the use named 'John Smith'
+Revoke 'DATA650'
+To see which permission a user has the for a table the user_permission command is used as seen below:
+User_permission 'DATA650'
+The mention above code can be used to set up an HBase Table for the retail store. An automated solution for populating tables would be best suited for future implementations
+books',' Topic', 'Sub-topic', 'Title', 'Series',' Series Title', 'Series Number', 'Author', 'Author Affiliation', 'Publisher', 'Reprint edition', 'Language', 'Paperback', 'ISBN'
+
+ 
+Verification of the table being created in HBase or to check it the books table is done using the list command. The user can also see information about the recently created table using the describe command. 
+describe 'books.'
+The describe() command displays information about column families, associated filters, and the version of the table. 
+Once the table is created, the records provided as examples from the business are loaded into the table using the put() command. 
+Record 1:
+put 'books', '00001',' Topic', 'Fiction' 
+put 'books', '00001','Sub-topic', 'Young-adult' 
+put 'books', '00001','Sub-topic', 'Mystery' 
+put 'books', '00001','Sub-topic', 'Adventure', 
+put 'books', '00001','Title',' A study in Charlotte' 
+put 'books', '00001','Series','Yes' 
+put 'books', '00001','Series Title', 'Charlotte Holmes Series' 
+put 'books', '00001','Series Number','1'
+put 'books', '00001','Author', 'Author 1: Brittany Cavallaro' ,'Author', 'Author 2:','Author','Author 4:' 
+put 'books', '00001','Publisher',' Katherine Tegen Books'
+put 'books', '00001','Reprint edition', 'January 3, 2017' 
+put 'books', '00001','Language',' English' 
+put 'books', '00001','Paperback', '352 pages',
+put 'books', '00001','ISBN', 'ISBN-10: 0062398911','ISBN', 'ISBN-13: 978-0062398918'
+put 'books', '00001','Product Dimensions' ,'5.3 x 0.8 x 8 inches' 
+ 
+Record 2:
+put 'books', '00002',' Topic', 'Non-Fiction.'
+put 'books', '00002','Sub-topic', 'Adult' 
+put 'books', '00002','Sub-topic', 'Young-Adult' 
+put 'books', '00002','Sub-topic', 'Self Help' 
+put 'books', '00002','Sub-topic', 'Professional training'
+put 'books', '00002','Sub-topic', 'Comedy' 
+put 'books', '00002','Title',' How to be a comedian'
+put 'books', '00002','Series' 'no' 
+put 'books', '00002','Author', 'Author 1: George Carlin', 'Author 2:David Letterman', 'Author 3: Jay Leno', 'Author 4: Conan O'Brian', 'Author 5: Jimmy Kimmel', 'Author 5: George Lopez', 'Author 6: Eddie Murphy', 'Author 7: Ellen Degeneres', 'Author 8: Richard Pryor', 'Author 9: Margaret Cho'
+put 'books', '00002','Author Affiliation,' 'Author 2, 12 Second Street, NY 10005', 'Author 5, 91, Hollywood Street, Los Angeles, CA 90100'
+put 'books', '00002',' Publisher', 'McGraw Hill Academic Press'
+put 'books', '00002',' Reprint edition','8'
+put 'books', '00002','Language',' English'
+ put 'books', '00002','Paperback', '666 pages' 
+put 'books', '00002','ISBN','ISBN-10: 0087738911', '00002','ISBN','ISBN-13: 942-006711918'
+The following commands are used to verify information about the newly created table and two records have been added and explain their functions.
+exists 'books.' 
+checks to see of books table exists
+count 'books' 
+count the number of records in the table
+get 'books','00001' 
+read record 00001 from books table
+scan 'books' 
+scans data in HTable books and returns table data.
+If the user wanted to delete a record from the books table, they would use the command 
+deleteall 'books,' '00001'.
+The book's table has been created but if the business wanted to update the table. The alter command is used. Below is an example of using the alter command:
+Alter 'books', {Name => 'issue date'}
+The above command will add a new column family to the Hbase table books. If a column needs to be removed the alter command is used as seen below:
+Alter 'books', {Name => 'issue date', Method => 'delete'}
+The alter command can also be used to update the maximum number of cells of a column family as seen below:
+alter 'books', NAME ⇒ ' author', VERSIONS ⇒ 5
+There are several different commands to consider as well for security purposes. There are three commands used for this function: grant, revoke, and user_permission.
+The grant command gives specific user rights such as read, write, execute, and admin on a table for a user. The example below grants all privileges to the user 'DATA650'
+Grant 'DATA650', 'RWXCA' ['books']
+The following code revokes all permission from the use named 'John Smith'
+Revoke 'DATA650'
+To see which permission a user has the for a table the user_permission command is used as seen below:
+User_permission 'DATA650'
+The mention above code can be used to set up an HBase Table for the retail store. An automated solution for populating tables would be best suited for future implementations
